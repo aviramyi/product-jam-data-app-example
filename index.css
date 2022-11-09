@@ -2,8 +2,45 @@
 /* LAYOUT HELPERS */
 /* !!!!!!!!!!!!!!!!!!!! */
 
+
+#teamNameSearch {
+  margin-top: 17px;
+  margin-bottom: 10px;
+}
+
+.filterSectionTitle {
+  padding-left: 10px;
+}
+
+.filterObject {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.filtersSection {
+  box-sizing: border-box;
+  flex-grow: 0;
+  flex-basis: 100%;
+  border: 2px dotted orangered;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  flex-grow: 4;
+}
+
+.filtersSectionInner {
+  border: 2px dotted blue;
+  display: flex;
+  margin-top: 2px;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  overflow-y: auto;
+}
+
 #container {
   width: 100%;
+  display: flex;
   margin: 0 auto;
 }
 
@@ -43,6 +80,10 @@
 
 /* adjustments for medium screens, like some tablets or landscape on a mobile */
 @media (min-width: 576px) {
+  .filtersSection {
+    flex-basis: 10%;
+  }
+
   .item {
     flex-basis: 50%;
   }

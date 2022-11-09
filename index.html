@@ -2,14 +2,40 @@
 
 <head>
   <meta charset=utf-8>
-  <title>My Data App</title>
+  <title>NBA Teams Search</title>
   <link rel="stylesheet" href="index.css" />
 </head>
 
 <body>
   <div id="container">
     <div id="main">
-      <h1 class="content">My Data App</h1>
+      <h1 class="content">NBA Teams Search</h1>
+      <div class="filtersSection">
+        <h3 class="filterSectionTitle">Filters</h2>
+
+          <div class="filtersSectionInner">
+            <div class="filterObject" id="teamNameSearch">
+              <input type="text" placeholder="Search by team name..">
+            </div>
+
+            <div class="filterObject">
+              <label for="searchPlayer">Find by player:</br></label>
+              <select name="searchPlayer" id="searchPlayer" class="filterObject">
+                <option value="volvo">Volvo</option>
+              </select>
+            </div>
+
+            <div class="filterObject">
+              <label for="sortBy">Sort teams by:</br></label>
+              <select name="sortBy" id="sortBy" class="filterObject">
+                <option value="nameAsc">Name (Ascending)</option>
+                <option value="nameDesc">Name (Descending)</option>
+                <option value="city">City</option>
+                <option value="division">Division</option>
+              </select>
+            </div>
+          </div>
+      </div>
 
       <div id="app" class="row">
 
@@ -35,6 +61,15 @@
           </div>
         </div>
         <!-- End example showing the css layout -->
+
+        <template id="item-template">
+          <div class="item">
+            <div class="content">
+              <h2>Example Heading</h2>
+              <p>Example text.</p>
+            </div>
+          </div>
+        </template>
 
       </div>
     </div>
