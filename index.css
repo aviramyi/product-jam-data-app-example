@@ -29,6 +29,7 @@
 }
 
 .filtersSectionInner {
+  box-sizing: border-box;
   border: 2px dotted blue;
   display: flex;
   margin-top: 2px;
@@ -81,7 +82,7 @@
 /* adjustments for medium screens, like some tablets or landscape on a mobile */
 @media (min-width: 576px) {
   .filtersSection {
-    flex-basis: 10%;
+    flex-basis: 1%;
   }
 
   .item {
