@@ -2,6 +2,9 @@
 /* LAYOUT HELPERS */
 /* !!!!!!!!!!!!!!!!!!!! */
 
+#mainTitle {
+  text-align: center;
+}
 
 #teamNameSearch {
   margin-top: 17px;
@@ -13,6 +16,7 @@
 }
 
 .filterObject {
+  padding-top: 2px;
   padding-left: 6px;
   padding-right: 6px;
 }
@@ -69,6 +73,12 @@
 
   /* design helper */
   border: 1px dotted blueviolet;
+}
+
+.contentDetails {
+  /* Usage: always nest inside .content */
+  float: left;
+  width: 90%
 }
 
 .item.meta {

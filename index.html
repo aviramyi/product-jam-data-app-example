@@ -9,7 +9,9 @@
 <body>
   <div id="container">
     <div id="main">
-      <h1 class="content">NBA Teams Search</h1>
+      <h1 id="mainTitle" class="content">NBA Teams Search <img
+          src="https://www.freeiconspng.com/uploads/basketball-png-7.png" width="40" alt="Basketball"></img>
+      </h1>
       <div class="filtersSection">
         <h3 class="filterSectionTitle">Filters</h2>
 
@@ -18,19 +20,19 @@
               <input type="text" placeholder="Search by team name..">
             </div>
 
-            <div class="filterObject">
+            <div class="filterObject" id="searchPlayerDiv">
               <label for="searchPlayer">Find by player:</br></label>
               <select name="searchPlayer" id="searchPlayer" class="filterObject">
-                <option value="volvo">Volvo</option>
+                <option>Select player...</option>
+                <!-- Will add list of players using JS -->
               </select>
             </div>
 
             <div class="filterObject">
-              <label for="sortBy">Sort teams by:</br></label>
-              <select name="sortBy" id="sortBy" class="filterObject">
+              <label for="teamsSortBy">Sort teams by:</br></label>
+              <select name="teamsSortBy" id="teamsSortBy" class="filterObject">
                 <option value="nameAsc">Name (Ascending)</option>
                 <option value="nameDesc">Name (Descending)</option>
-                <option value="city">City</option>
                 <option value="division">Division</option>
               </select>
             </div>
@@ -40,38 +42,16 @@
       <div id="app" class="row">
 
         <!-- Start example showing the css layout -->
-        <div class="item">
-          <div class="content">
-            <h2>Team name</h2>
-            <p>Example text.</p>
-          </div>
-        </div>
-
-        <div class="item">
-          <div class="content">
-            <h2>Example Heading</h2>
-            <p>Example text.</p>
-          </div>
-        </div>
-
-        <div class="item">
-          <div class="content">
-            <h2>Example Heading</h2>
-            <p>Example text.</p>
-          </div>
-        </div>
-        <!-- End example showing the css layout -->
-
-        <template id="item-template">
-          <div class="item">
-            <div class="content">
-              <h2>Example Heading</h2>
-              <p>Example text.</p>
-            </div>
-          </div>
-        </template>
+        <h1>Loading Data...</h1>
 
       </div>
+      <template id="player-details-template">
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </template>
     </div>
   </div>
   <script type="module" src="index.js"></script>
