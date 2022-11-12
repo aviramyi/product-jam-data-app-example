@@ -14,7 +14,7 @@ async function queryEndpoint(endpoint, start_page, max_page, isSearch = false) {
   let data = null;
   try {
     while (response.meta != null && response.meta.next_page != null && response.meta.next_page < max_page + 1) {
-      response = await fetch(endpoint.concat(`${isSearch ? `&` : '?'}page=${response.meta.next_page}`));
+      response = await fetch(endpoint.concat(`${isSearch ? `&` : '?'}page=${response.meta.next_page}&per_page=100`));
       console.log(response);
       if (response.status === 200) {
         const parsedResponse = await response.json();
@@ -42,7 +42,8 @@ async function getTeamById(id) {
 }
 
 async function getAllPlayers() {
-  return (await queryEndpoint(baseURL.concat(allPlayersSuffix), 1, 8)).data;
+  var raw_data = (await queryEndpoint(baseURL.concat(allPlayersSuffix), 1, 15)).data;
+  return Object.values(raw_data)
 }
 
 /// FILTER FUNCTIONS
@@ -128,6 +129,7 @@ async function renderUI(allPlayersData, teamsData) {
 }
 
 let [allTeamsData, allPlayersData] = await Promise.all([getAllTeams(), getAllPlayers()]);
+allPlayersData.sort(((a, b) => a.last_name < b.last_name ? -1 : 1));
 let currentlySelectTeams = allTeamsData;
 
 ////// filters and listeners
