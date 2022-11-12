@@ -9,20 +9,30 @@ const allTeamsSuffix = "/teams";
 const allPlayersSuffix = "/players"
 const teamSearchByIdTemplate = (teamId) => `/${teamId}`
 
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
 async function queryEndpoint(endpoint, start_page, max_page, isSearch = false) {
   let response = { meta: { next_page: start_page } };
   let data = null;
   try {
     while (response.meta != null && response.meta.next_page != null && response.meta.next_page < max_page + 1) {
-      response = await fetch(endpoint.concat(`${isSearch ? `&` : '?'}page=${response.meta.next_page}&per_page=100`));
-      console.log(response);
+      const current_page = response.meta.next_page;
+      response = await fetch(endpoint.concat(`${isSearch ? `&` : '?'}page=${current_page}&per_page=100`));
       if (response.status === 200) {
         const parsedResponse = await response.json();
         response = parsedResponse;
         if (data == null) {
           data = { data: parsedResponse.data != null ? parsedResponse.data : parsedResponse };
         } else {
-          data.data = { ...data.data, ...parsedResponse.data };
+          data.data = [...data.data, ...parsedResponse.data]
+        }
+      } else if (response.status === 429) {
+        await delay(1000);
+        response = await fetch(endpoint.concat(`${isSearch ? `&` : '?'}page=${current_page}&per_page=100`));
+        if (response.status === 429) {
+          console.log(`got 429 twice. current page: ${res}`)
         }
       }
     }
@@ -42,7 +52,7 @@ async function getTeamById(id) {
 }
 
 async function getAllPlayers() {
-  var raw_data = (await queryEndpoint(baseURL.concat(allPlayersSuffix), 1, 15)).data;
+  var raw_data = (await queryEndpoint(baseURL.concat(allPlayersSuffix), 1, 8)).data;
   return Object.values(raw_data)
 }
 
@@ -63,6 +73,17 @@ function clearUI() {
   app.innerHTML = `<h1>Loading Data...</h1>`
 }
 
+function getPosition(position_char) {
+  switch (position_char) {
+    case 'G':
+      return "Guard"
+    case 'F':
+      return "Front"
+    default:
+      return "Fullstack"
+  }
+}
+
 function populateContentElementWithData(contentElement, teamDataElement, playersDataElement) {
 
   const player_details_template = document.getElementById("player-details-template");
@@ -75,7 +96,7 @@ function populateContentElementWithData(contentElement, teamDataElement, players
   </div>
   <p>Division: ${teamDataElement.division}</p>
   <div class="contentPlayersList">
-  ${playersDataElement.length != 0 ? `<p>players:</p>
+  ${playersDataElement.length != 0 ? `<p>Partial players list:</p>
   <table>
     <thead>
       <tr>
@@ -93,13 +114,13 @@ function populateContentElementWithData(contentElement, teamDataElement, players
 
   const content_element_table_body = contentElement.querySelector("tbody");
 
-  playersDataElement.forEach(playerElement => {
+  playersDataElement.slice(0, 10).forEach(playerElement => {
     const player_details_clone = player_details_template.content.firstElementChild.cloneNode(true);
     const playerDetails = player_details_clone.querySelectorAll("td");
 
     playerDetails[0].innerHTML = playerElement.first_name;
     playerDetails[1].innerHTML = playerElement.last_name;
-    playerDetails[2].innerHTML = playerElement.position == "" ? "Unkown" : "G" ? "Guard" : "Center";
+    playerDetails[2].innerHTML = getPosition(playerElement.position);
 
     content_element_table_body.appendChild(player_details_clone);
   })
@@ -129,7 +150,7 @@ async function renderUI(allPlayersData, teamsData) {
 }
 
 let [allTeamsData, allPlayersData] = await Promise.all([getAllTeams(), getAllPlayers()]);
-allPlayersData.sort(((a, b) => a.last_name < b.last_name ? -1 : 1));
+allPlayersData.sort(((a, b) => a.first_name < b.first_name ? -1 : 1));
 let currentlySelectTeams = allTeamsData;
 
 ////// filters and listeners
