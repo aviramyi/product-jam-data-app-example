@@ -44,7 +44,7 @@ async function queryEndpoint(endpoint, start_page, max_page, isSearch = false) {
 }
 
 async function getAllTeams() {
-  return (await queryEndpoint(baseURL.concat(allTeamsSuffix), 1, 8)).data;
+  return (await queryEndpoint(baseURL.concat(allTeamsSuffix), 1, 15)).data;
 }
 
 async function getTeamById(id) {
@@ -52,7 +52,7 @@ async function getTeamById(id) {
 }
 
 async function getAllPlayers() {
-  var raw_data = (await queryEndpoint(baseURL.concat(allPlayersSuffix), 1, 8)).data;
+  var raw_data = (await queryEndpoint(baseURL.concat(allPlayersSuffix), 1, 10)).data;
   return Object.values(raw_data)
 }
 
@@ -80,7 +80,7 @@ function getPosition(position_char) {
     case 'F':
       return "Front"
     default:
-      return "Fullstack"
+      return Math.floor(Math.random() * 2) == 0 ? "Guard" : "Front"
   }
 }
 
@@ -89,7 +89,7 @@ function populateContentElementWithData(contentElement, teamDataElement, players
   const player_details_template = document.getElementById("player-details-template");
 
   contentElement.innerHTML = `
-  <h2>${teamDataElement.full_name}</h2>
+  <h2 class=teamTitle>${teamDataElement.full_name}</h2>
   <div class="contentDetails">
     <p>City: ${teamDataElement.city}</p>
     <p>Abbr: ${teamDataElement.abbreviation}</p>
@@ -97,7 +97,7 @@ function populateContentElementWithData(contentElement, teamDataElement, players
   <p>Division: ${teamDataElement.division}</p>
   <div class="contentPlayersList">
   ${playersDataElement.length != 0 ? `<p>Partial players list:</p>
-  <table>
+  <table class="playerListTable">
     <thead>
       <tr>
         <td>First Name</td>
@@ -113,6 +113,14 @@ function populateContentElementWithData(contentElement, teamDataElement, players
   `
 
   const content_element_table_body = contentElement.querySelector("tbody");
+
+  const players_with_position = playersDataElement.filter(player => player.position !== '');
+  if (players_with_position.length < 10) {
+    const players_without_position = playersDataElement.filter(player => player.position === '');
+    for (let i = 0; i < 10 - players_with_position.length; i++) {
+      players_with_position.push(players_without_position[i])
+    }
+  }
 
   playersDataElement.slice(0, 10).forEach(playerElement => {
     const player_details_clone = player_details_template.content.firstElementChild.cloneNode(true);

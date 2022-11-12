@@ -2,66 +2,115 @@
 /* LAYOUT HELPERS */
 /* !!!!!!!!!!!!!!!!!!!! */
 
+.teamTitle {
+  font-size: 30px;
+  font-weight: 400;
+  background-image: linear-gradient(to right, #9a4a3c, #b393d3);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
 #mainTitle {
   text-align: center;
+  position: relative;
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 
 #teamNameSearch {
-  margin-top: 17px;
-  margin-bottom: 10px;
+  margin-top: 22px;
+  margin-bottom: 1px;
 }
 
 .filterSectionTitle {
-  padding-left: 10px;
+  padding-left: 2%;
 }
 
 .filterObject {
-  padding-top: 2px;
-  padding-left: 6px;
-  padding-right: 6px;
+  text-align: center;
+  margin: 1%;
+  align-items: center;
 }
 
 .filtersSection {
   box-sizing: border-box;
-  flex-grow: 0;
-  flex-basis: 100%;
-  border: 2px dotted orangered;
+  border: 1px solid rgb(226, 92, 43);
+  border-radius: 0.8rem;
+  align-items: center;
   position: relative;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 5%;
   flex-grow: 4;
+  text-align: center;
+  overflow: auto;
 }
 
 .filtersSectionInner {
   box-sizing: border-box;
-  border: 2px dotted blue;
+  flex-grow: 0;
+  flex-basis: 100%;
   display: flex;
-  margin-top: 2px;
-  margin-left: 2px;
-  margin-right: 2px;
-  margin-bottom: 2px;
-  overflow-y: auto;
+  align-items: center;
+  border: 0.5px solid rgb(226, 92, 43);
+  border-radius: 0.8rem;
+  margin: 3%;
+  overflow: auto;
 }
 
 #container {
   width: 100%;
-  display: flex;
-  margin: 0 auto;
-  box-shadow: 5px;
+  display: flexbox;
+  margin: 5 auto;
+  box-shadow: 0 4px 8px 5px rgba(0, 0, 0, 0.2), 0 6px 20px 5px rgba(0, 0, 0, 0.19);
+  background: rgba(253, 253, 253, 0.7)
 }
 
 .row {
   display: flex;
   flex-wrap: wrap;
+  margin: 2%;
 }
 
 .item {
   box-sizing: border-box;
   flex-grow: 0;
   flex-basis: 100%;
+  border: 1px solid rgb(226, 92, 43);
+  border-radius: 0.8rem;
+  margin: 5px;
+}
 
-  /* design helper */
-  border: 1px dotted orangered;
+.playerListTable {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 250px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.playerListTable thead tr {
+  text-align: center;
+  background-color: #e47b0b;
+  color: #ffffff;
+}
+
+.playerListTable th,
+.playerListTable td {
+  padding: 4px 4px;
+  text-align: center;
+}
+
+.playerListTable tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.playerListTable tbody tr:nth-of-type(even) {
+  background: rgba(255, 255, 255, 0.586);
+}
+
+.playerListTable tbody tr:last-of-type {
+  border-bottom: 2px solid #c87114;
 }
 
 .content {
@@ -69,11 +118,9 @@
   flex-grow: 0;
   flex-basis: 100%;
   box-sizing: border-box;
-  margin: 5px;
+  margin: 12px;
   padding: 10px;
-
-  /* design helper */
-  border: 1px dotted blueviolet;
+  /* overflow: auto; */
 }
 
 .contentDetails {
@@ -131,11 +178,6 @@ body {
   animation: gradient 15s ease infinite;
   background-size: 400% 400%;
   background-attachment: fixed;
-}
-
-.data-record {
-  /* visual helper */
-  border: 1px solid blueviolet;
 }
 
 /* !!!!!!!!!!!!!!!!!!!! */
