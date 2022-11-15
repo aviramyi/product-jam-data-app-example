@@ -78,9 +78,9 @@ function getPosition(position_char) {
     case 'G':
       return "Guard"
     case 'F':
-      return "Front"
+      return "Forward"
     default:
-      return Math.floor(Math.random() * 2) == 0 ? "Guard" : "Front"
+      return Math.floor(Math.random() * 2) == 0 ? "Guard" : "Forward"
   }
 }
 

@@ -69,6 +69,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 2%;
+  align-items: center;
 }
 
 .item {
@@ -78,6 +79,7 @@
   border: 1px solid rgb(226, 92, 43);
   border-radius: 0.8rem;
   margin: 5px;
+  align-items: center;
 }
 
 .playerListTable {
@@ -120,6 +122,7 @@
   box-sizing: border-box;
   margin: 12px;
   padding: 10px;
+  align-items: center;
   /* overflow: auto; */
 }
 
