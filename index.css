@@ -34,7 +34,6 @@
 }
 
 .filtersSection {
-  display: flex;
   box-sizing: border-box;
   border: 1px solid rgb(226, 92, 43);
   border-radius: 0.8rem;
